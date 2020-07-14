@@ -13,7 +13,12 @@ import axios from "axios"
 axios
     .get('https://lambda-times-backend.herokuapp.com/topics')
     .then((something) => {
-        tabsContainer.appendChild(tabMaker(something))
+        const topics = something.data.topics
+        topics.forEach(topic => {
+            const tab = tabMaker(topic)
+            tabsContainer.appendChild(tab)
+        })
+        
     })
     .catch((error) => {
         console.log(error)
@@ -29,5 +34,5 @@ function tabMaker (object){
     return tab
     }
 
-    console.log(tabMaker())
+ 
 
