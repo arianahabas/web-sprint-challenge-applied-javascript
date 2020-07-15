@@ -21,49 +21,45 @@
 //
 // Use your function to create a card for each of the articles, and append each card to the DOM.
 
-import axios from "axios";
 
-axios
-    .get('https://lambda-times-backend.herokuapp.com/articles')
-    .then((a) => {
-        const articles = a.data.articles;
-        for(let obj in articles) {
-            articles[obj].forEach((item) => {
-                articleMaker(item);
-            })
+    import axios from "axios";
+    axios
+      .get("https://lambda-times-backend.herokuapp.com/articles")
+      .then((obj) => {
+        const articles = obj.data.articles;
+        for (let obj in articles) {
+          articles[obj].forEach((item) => {
+            Cards(item);
+          });
         }
-    })
-    .catch((error) => {
-        console.log(error)
-    })
+      })
+      .catch((error) => 
+      console.log(error));
 
     const cardContainer = document.querySelector(".cards-container");
+    
+    function Cards(obj) {
+      const container = document.createElement("div");
+      const headline = document.createElement("div");
+      const authorContainer = document.createElement("div");
+      const imageContainer = document.createElement("div");
+      const image = document.createElement("img");
+      const author = document.createElement("span");
+      container.classList.add("card");
+      headline.classList.add("headline");
+      authorContainer.classList.add("author");
+      imageContainer.classList.add("img-container");
+      headline.textContent = `${obj.headline}`;
+      image.src = `${obj.authorPhoto}`;
+      author.textContent = `By ${obj.authorName}`;
+      container.append(headline);
+      container.append(authorContainer);
+      authorContainer.append(imageContainer);
+      imageContainer.append(image);
+      authorContainer.append(author);
+      cardContainer.append(container);
 
-    function articleMaker(obj){
-        // define new elements
-        const card = document.createElement('div')
-        const headline = document.createElement('div')
-        const author = document.createElement('div')
-        const imgContainer = document.createElement('div')
-        const image = document.createElement('img')
-        const authorsName = document.createElement('span')
-        // Setup structure of elements
-        card.appendChild(headline)
-        card.appendChild(author)
-        author.appendChild(imgContainer)
-        author.appendChild(authorsName)
-        imgContainer.appendChild(image)
-        cardContainer.append(card)
-        // set class names
-        card.classList.add = ('card')
-        headline.classList.add = ('headline')
-        author.classList.add = ('author')
-        imgContainer.classList.add = ('img-container')
-        // set text content
-        headline.textContent = `${obj.headline}`
-        image.src =`${obj.authorPhoto}`
-        authorsName.textContent =`By ${obj.authorName}`
-
-        return card
+      container.addEventListener('click', ()=>{
+        console.log(headline)
+    })
     }
-

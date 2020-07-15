@@ -25,9 +25,9 @@ header.appendChild(date)
 header.appendChild(h1)
 header.appendChild(temp)
 
-header.className = 'header'
-date.className = 'date'
-temp.className = 'temp'
+header.classList.add('header')
+date.classList.add('date')
+temp.classList.add('temp')
 
 h1.textContent = 'Lambda Times'
 temp.textContent = '98°'
@@ -35,7 +35,6 @@ date.textContent ='MARCH 28, 2020'
 
 
 return header
-
 }
 // console.log(Header())
 
